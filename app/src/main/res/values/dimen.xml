@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Textsize_listlacakmobil_top">7pt</dimen>
+    <dimen name="Textsize_listlacakmobil_bot">9pt</dimen>
+</resources>

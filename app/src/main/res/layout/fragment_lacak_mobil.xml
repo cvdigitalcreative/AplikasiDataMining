@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".View.LacakMobil">
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:id="@+id/search_mobil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Lakukan Pencarian" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_nopol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:hint="Nomor Plat" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cari" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:background="#fff">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:textSize="@dimen/Textsize_listlacakmobil_top"
+                android:id="@+id/tv_no_polisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BG 1892 UZ" />
+
+            <TextView
+                android:textSize="@dimen/Textsize_listlacakmobil_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - " />
+
+            <TextView
+                android:textSize="9pt"
+                android:id="@+id/tv_nama_pemiliki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="udin kece" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_mobil"
+            android:layout_gravity="center"
+            android:textSize="@dimen/Textsize_listlacakmobil_bot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAUL LEASING ERTIGA" />
+
+        <Button
+            android:id="@+id/search_back_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kembali"/>
+    </LinearLayout>
+</LinearLayout>
