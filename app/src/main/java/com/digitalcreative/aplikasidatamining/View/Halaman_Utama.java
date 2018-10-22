@@ -9,7 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.digitalcreative.aplikasidatamining.Controller.BackendFirebase;
+import com.digitalcreative.aplikasidatamining.Controller.Tools;
 import com.digitalcreative.aplikasidatamining.R;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,20 +48,31 @@ public class Halaman_Utama extends Fragment {
         lacakbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LacakMobil lacakMobil = new LacakMobil();
-                FragmentTransaction fragmentTransaction =  getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container_base, lacakMobil);
-                fragmentTransaction.addToBackStack(null).commit();
+//                LacakMobil lacakMobil = new LacakMobil();
+//                FragmentTransaction fragmentTransaction =  getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.container_base, lacakMobil);
+//                fragmentTransaction.addToBackStack(null).commit();
+                Tools tools=new Tools();
+                ArrayList<ArrayList> data_=tools.loadSharedPreferencesLogList(view.getContext());
+                System.out.println(data_.get(1).get(1));
             }
         });
 
         updatedatabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Update_Data update_data = new Update_Data();
-                FragmentTransaction fragmentTransaction =  getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container_base, update_data);
-                fragmentTransaction.addToBackStack(null).commit();
+//                Update_Data update_data = new Update_Data();
+//                FragmentTransaction fragmentTransaction =  getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.container_base, update_data);
+//                fragmentTransaction.addToBackStack(null).commit();
+                BackendFirebase backendFirebase=new BackendFirebase();
+                try {
+                    backendFirebase.downloadFile(view.getContext());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         });
 
