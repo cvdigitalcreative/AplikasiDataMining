@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.digitalcreative.aplikasidatamining.View.Halaman_Utama;
+import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
 
 public class BaseActivity extends AppCompatActivity {
 

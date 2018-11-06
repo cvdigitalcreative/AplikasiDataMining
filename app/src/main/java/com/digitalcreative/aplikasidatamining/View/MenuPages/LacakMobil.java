@@ -1,4 +1,4 @@
-package com.digitalcreative.aplikasidatamining.View;
+package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.digitalcreative.aplikasidatamining.R;
+import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
 
 /**
  * A simple {@link Fragment} subclass.

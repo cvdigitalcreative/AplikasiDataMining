@@ -1,4 +1,4 @@
-package com.digitalcreative.aplikasidatamining.View;
+package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.digitalcreative.aplikasidatamining.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LacakMobil_Detail extends Fragment {
+public class Update_Profil extends Fragment {
 
 
-    public LacakMobil_Detail() {
+    public Update_Profil() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,8 @@ public class LacakMobil_Detail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.lacak_mobil__detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_update__profil, container, false);
+        return view;
     }
 
 }

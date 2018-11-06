@@ -1,4 +1,4 @@
-package com.digitalcreative.aplikasidatamining.View;
+package com.digitalcreative.aplikasidatamining.View.HomePage;
 
 
 import android.os.Bundle;
@@ -8,10 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.digitalcreative.aplikasidatamining.Controller.BackendFirebase;
 import com.digitalcreative.aplikasidatamining.Controller.Tools;
 import com.digitalcreative.aplikasidatamining.R;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.Cara_Pembayaran;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.Custumer_Service;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.Update_Profil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +24,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Halaman_Utama extends Fragment {
-    Button lacakbtn, updatedatabtn, updateprofilbtn, csbtn, carapembayaranbtn;
+    LinearLayout updateprofilbtn, csbtn, carapembayaranbtn, lacakbtn, updatedatabtn;
 
     public Halaman_Utama() {
         // Required empty public constructor
@@ -108,7 +112,7 @@ public class Halaman_Utama extends Fragment {
     }
 
     private void descTheComponent(View view) {
-        //Button
+        //LinearLayout
         lacakbtn = view.findViewById(R.id.lacakmobil_menu);
         updatedatabtn = view.findViewById(R.id.updatedata_menu);
         updateprofilbtn = view.findViewById(R.id.updateprofil_menu);

@@ -1,4 +1,4 @@
-package com.digitalcreative.aplikasidatamining.View;
+package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.digitalcreative.aplikasidatamining.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Cara_Pembayaran extends Fragment {
+public class Custumer_Service extends Fragment {
 
 
-    public Cara_Pembayaran() {
+    public Custumer_Service() {
         // Required empty public constructor
     }
 
@@ -24,8 +24,7 @@ public class Cara_Pembayaran extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cara__pembayaran, container, false);
-
+        View view =  inflater.inflate(R.layout.fragment_custumer_service, container, false);
         return view;
     }
 
