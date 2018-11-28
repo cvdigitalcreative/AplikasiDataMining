@@ -13,9 +13,9 @@
     <dimen name="Base_layout_height">150dp</dimen>
     <dimen name="Base_paddingTop">15dp</dimen>
 
-    <dimen name="Menu_MarginRight">30dp</dimen>
+    <dimen name="Menu_MarginRight">23dp</dimen>
     <dimen name="Menu_padding_vertical">5dp</dimen>
-    <dimen name="Menu_padding_horizontal">8dp</dimen>
+    <dimen name="Menu_padding_horizontal">12dp</dimen>
 
     <dimen name="Btn_halUt_height">80dp</dimen>
     <dimen name="Btn_margin_bot">15dp</dimen>
@@ -32,4 +32,12 @@
 
     <dimen name="Padding_btnImage">15dp</dimen>
     <dimen name="Padding_menuImage">15dp</dimen>
+
+    <dimen name="Iconsize_wa_message_call_cs_square">55dp</dimen>
+    <dimen name="Iconsize_wa_message_call_cs_passive">40dp</dimen>
+    <dimen name="Iconsize_wa_message_call_cs_MarginRight">25dp</dimen>
+    <dimen name="Padding_linearlayout_inside">16dp</dimen>
+    <dimen name="Textview_marginBot">10dp</dimen>
+    <dimen name="Textsize_CS_title">13pt</dimen>
+    <dimen name="Textsize_CP_konten">9pt</dimen>
 </resources>
