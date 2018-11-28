@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#061745</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="Menus_background_color">#b3ffffff</color>
+    <color name="base_color">#ecf0f1</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="whit_color">#fff</color>
 </resources>

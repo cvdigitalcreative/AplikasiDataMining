@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "25667936935-pvrufolkprd3fe5p6kvtjcsc198e7j7s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.digitalcreative.aplikasidatamining",
+            "certificate_hash": "e9808507080cd380e4115c06e3314f68ab171046"
+          }
+        },
+        {
           "client_id": "25667936935-99204c87ljlkkgq2p584gpnuoulkrkau.apps.googleusercontent.com",
           "client_type": 3
         }
