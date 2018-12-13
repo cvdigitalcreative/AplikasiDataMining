@@ -6,4 +6,6 @@
     <color name="base_color">#ecf0f1</color>
     <color name="colorAccent">#FF4081</color>
     <color name="whit_color">#fff</color>
+
+    <color name="detail_mobil">#5de2e1e1</color>
 </resources>

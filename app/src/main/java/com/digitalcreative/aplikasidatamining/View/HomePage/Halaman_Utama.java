@@ -1,43 +1,28 @@
 package com.digitalcreative.aplikasidatamining.View.HomePage;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.Controller.BackendFirebase;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
-import com.digitalcreative.aplikasidatamining.Controller.Tools;
 import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.Cara_Pembayaran;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.Custumer_Service;
-import com.digitalcreative.aplikasidatamining.View.MenuPages.LacakMobil;
+import com.digitalcreative.aplikasidatamining.View.MenuPages.Lacak_Mobil_Activity;
 import com.digitalcreative.aplikasidatamining.View.MenuPages.Update_Profil;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +33,7 @@ public class Halaman_Utama extends Fragment {
     SharedPreferences myPref;
     String nama_u, notelp_u, first_char;
     LinearLayout finished;
+    Button logout;
 
     public Halaman_Utama() {
         // Required empty public constructor
@@ -99,10 +85,8 @@ public class Halaman_Utama extends Fragment {
         lacakbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LacakMobil lacakMobil = new LacakMobil();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container_base, lacakMobil);
-                fragmentTransaction.addToBackStack(null).commit();
+                Intent lacakintent = new Intent(getActivity(), Lacak_Mobil_Activity.class);
+                startActivity(lacakintent);
             }
         });
 
@@ -149,9 +133,21 @@ public class Halaman_Utama extends Fragment {
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogoutPage update_profil = new LogoutPage();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container_base, update_profil).commit();
+            }
+        });
     }
 
     private void descTheComponent(View view) {
+        //Button
+        logout = view.findViewById(R.id.logout_account);
+
         //LinearLayout
         lacakbtn = view.findViewById(R.id.lacakmobil_menu);
         updatedatabtn = view.findViewById(R.id.updatedata_menu);

@@ -40,4 +40,11 @@
     <dimen name="Textview_marginBot">10dp</dimen>
     <dimen name="Textsize_CS_title">13pt</dimen>
     <dimen name="Textsize_CP_konten">9pt</dimen>
+
+    <!--Detil Mobil Dimensi-->
+    <dimen name="detail_mobil_textSize">15dp</dimen>
+    <dimen name="detail_mobil_paddingHor">20dp</dimen>
+    <dimen name="detail_mobil_paddingVer">5dp</dimen>
+
+    <dimen name="lacak_mobil">18dp</dimen>
 </resources>
