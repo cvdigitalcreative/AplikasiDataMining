@@ -5,6 +5,60 @@ public class Model_LacakMobil {
     String no_plat;
     String nama_mobil;
     String cabang;
+    String tahun;
+    String finance;
+    String namaunit;
+    String ovd;
+    String noka;
+    String nosin;
+
+    public String getTahun() {
+        return tahun;
+    }
+
+    public void setTahun(String tahun) {
+        this.tahun = tahun;
+    }
+
+    public String getFinance() {
+        return finance;
+    }
+
+    public void setFinance(String finance) {
+        this.finance = finance;
+    }
+
+    public String getNamaunit() {
+        return namaunit;
+    }
+
+    public void setNamaunit(String namaunit) {
+        this.namaunit = namaunit;
+    }
+
+    public String getOvd() {
+        return ovd;
+    }
+
+    public void setOvd(String ovd) {
+        this.ovd = ovd;
+    }
+
+    public String getNoka() {
+        return noka;
+    }
+
+    public void setNoka(String noka) {
+        this.noka = noka;
+    }
+
+    public String getNosin() {
+        return nosin;
+    }
+
+    public void setNosin(String nosin) {
+        this.nosin = nosin;
+    }
 
     public String getCabang() {
         return cabang;

@@ -89,7 +89,6 @@ public class LoadingPage extends Fragment {
             System.out.println("progress = "+progress);
             try {
                 Thread.sleep(100);
-                progressBar.setProgress(progress);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -61,7 +61,7 @@ public class BackendFirebase {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
-                System.out.println("gagak cok");
+                Log.e("Failed", "Data Gagal di Download" +localFile.toString());
             }
         });
 

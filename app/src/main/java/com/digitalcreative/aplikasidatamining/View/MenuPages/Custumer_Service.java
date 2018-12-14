@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.R;
 import com.digitalcreative.aplikasidatamining.View.HomePage.Halaman_Utama;
@@ -73,9 +74,13 @@ public class Custumer_Service extends Fragment {
             @Override
             public void onClick(View v) {
                 String url = "https://api.whatsapp.com/send?phone=" +"+62811787843";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                try {
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException ex){
+                    Toast.makeText(getActivity(), "Whatsapp have not been installed", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
