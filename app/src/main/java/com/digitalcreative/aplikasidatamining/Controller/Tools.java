@@ -18,55 +18,6 @@ import java.util.List;
 
 public class Tools {
 
-    public static void saveSharedPreferencesLogList(Context context, String path) {
-
-        SharedPreferences mPrefs = context.getSharedPreferences("PhotoCollage", context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(path);
-        prefsEditor.putString("myJson", json);
-        prefsEditor.commit();
-        System.out.println(json);
-        System.out.println("berhasil");
-    }
-
-    public static String loadSharedPreferencesLogList(Context context) {
-        String savedCollage;
-        SharedPreferences mPrefs = context.getSharedPreferences("PhotoCollage", context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = mPrefs.getString("myJson", "");
-        if (json.isEmpty()) {
-            savedCollage ="";
-        } else {
-            Type type = new TypeToken<List<ArrayList>>() {
-            }.getType();
-            savedCollage = gson.fromJson(json, type);
-        }
-
-        return savedCollage;
-    }
-
-    public static String streamContainersIntoJsonString(ArrayList<ArrayList> collageList) {
-        try {
-            Gson gson = new Gson();
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.setIndent("  ");
-            writer.beginArray();
-            for (ArrayList container : collageList) {
-                gson.toJson(container, ArrayList.class, writer);
-            }
-            writer.endArray();
-            writer.close();
-
-            return out.toString("UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
     public ArrayList<ArrayList> load_excel_format_csv(String filename, String cvsSplitBy) {
         String csvFile = filename;
         String line = "";

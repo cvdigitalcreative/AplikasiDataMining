@@ -1,7 +1,9 @@
 package com.digitalcreative.aplikasidatamining.Controller;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -29,7 +31,7 @@ public class BackendFirebase {
         this.linearLayout = finished;
     }
 
-    public void downloadFile() throws IOException {
+    public void downloadFile(Context context) throws IOException {
         final ProgressDialog progress;
         progress=new ProgressDialog(context);
         progress.setMessage("Updating Data . . .");
@@ -37,18 +39,15 @@ public class BackendFirebase {
         progress.setIndeterminate(true);
         progress.setCancelable(false);
         progress.show();
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        // Create a storage reference from our app
-        StorageReference storageRef = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/aplikasidatamining.appspot.com/o/tes.csv?alt=media&token=7f7d59d8-6234-4eab-b11b-955ce65efd8a");
+        //Create a storage reference from our app
+        StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/aplikasidatamining.appspot.com/o/tes.csv?alt=media&token=c7ee63a0-d292-4490-b5b5-bfcc88c256ac");
 
-        //final File localFile = File.createTempFile("tes", "csv");
+        //Internal Storage Defenition Path Error Make us Badly Think and Thanks to saffan get solve this problem immediately
+        final File localFile = new File(context.getExternalFilesDir(null),"tes.csv");
+        //This one on top
 
-        File rootPath = new File(Environment.getExternalStorageDirectory(), "file_name");
-        if(!rootPath.exists()) {
-            rootPath.mkdirs();
-        }
-
-        final File localFile = new File(rootPath,"tes.csv");
         localFile.delete();
         storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
@@ -61,11 +60,14 @@ public class BackendFirebase {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
-                Log.e("Failed", "Data Gagal di Download" +localFile.toString());
+                Log.e("Failed", "Data Gagal di Download" +localFile.toString()+" "+exception.getLocalizedMessage());
             }
         });
 
-    }
+        }
+
+
+
 
     private void showUpdateDone() {
         //show

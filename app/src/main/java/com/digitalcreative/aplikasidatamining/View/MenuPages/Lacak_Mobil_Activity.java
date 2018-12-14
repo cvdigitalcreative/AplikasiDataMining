@@ -1,10 +1,12 @@
 package com.digitalcreative.aplikasidatamining.View.MenuPages;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +29,8 @@ import com.digitalcreative.aplikasidatamining.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Lacak_Mobil_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -58,12 +62,9 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
 
     private void getData() {
         Tools tools=new Tools();
-        File rootPath = new File(Environment.getExternalStorageDirectory(), "file_name");
-        if(!rootPath.exists()) {
-            rootPath.mkdirs();
-        }
 
-        final File localFile = new File(rootPath,"tes.csv");
+        final File localFile = new File(getApplicationContext().getExternalFilesDir(null),"tes.csv");
+
         data_=tools.load_excel_format_csv(localFile.toString(),",");
     }
 
@@ -96,6 +97,7 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 //Action ID  = 3
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
+
                     getvalue();
                     lastIndex = 1;
                 }
@@ -128,13 +130,16 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
     }
 
     private void performSearch() {
+
+
         searchmobil.clearFocus();
         InputMethodManager in = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(searchmobil.getWindowToken(), 0);
-
+//
         execute1stdataSearch(data_, lastIndex);
         recyclerView.setAdapter(detaillacakMobil);
         recyclerView.addOnScrollListener(paginationAdapter);
+
     }
 
     RecyclerView.OnScrollListener paginationAdapter = new RecyclerView.OnScrollListener() {
@@ -145,15 +150,7 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
             int totalItemCount = linearmanager.getItemCount();
             final int firstVisibleItemPosition = linearmanager.findFirstVisibleItemPosition();
 
-//            Tools tools=new Tools();
-//            File rootPath = new File(Environment.getExternalStorageDirectory(), "file_name");
-//            if(!rootPath.exists()) {
-//                rootPath.mkdirs();
-//            }
 //
-//            final File localFile = new File(rootPath,"tes.csv");
-//            data_=tools.load_excel_format_csv(localFile.toString(),",");
-
             int lastdata = data_.size()-1;
             if (index <= lastdata){
                 if (firstVisibleItemPosition + visibleItemCount >= totalItemCount) {
@@ -166,37 +163,39 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
                     }, 1000);
                 }
             }
-//            else {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "Pencarian Telah Berakhir", Toast.LENGTH_LONG).show();
-//                    }
-//                }, 1000);
-//            }
         }
     };
 
     private void execute1stdataSearch(ArrayList<ArrayList> data_, int current) {
         int count = 0;
             for (index = current; index < data_.size(); index++) {
-                if (data_.get(index).toString().toLowerCase().contains(getSearchMobil.toLowerCase())) {
+                Pattern p = Pattern.compile(getSearchMobil.toLowerCase());
+                Matcher m = p.matcher(data_.get(index).toString().toLowerCase());
+                if (m.find()) {
                     count++;
                     if (count <= 9){
                         String[] split_data = data_.get(index).get(0).toString().split(";");
 
                         final Model_LacakMobil model = new Model_LacakMobil();
                         model.setNama(split_data[1]);
-                        model.setNo_plat(split_data[2]);
-                        model.setNama_mobil(split_data[3]);
-                        model.setFinance(split_data[4]);
-                        model.setOvd(split_data[5]);
-                        if (split_data.length > 7) {
-                            model.setNoka(split_data[8]);
-                            model.setNosin(split_data[9]);
-                            model.setTahun(split_data[10]);
-                            model.setCabang(split_data[7]);
+                        System.out.println("sayur kool "+data_.get(index).get(0).toString());
+                        if (split_data.length > 2) {
+                            model.setNo_plat(split_data[2]);
+                            model.setNama_mobil(split_data[3]);
+                            model.setFinance(split_data[4]);
+                            model.setOvd(split_data[5]);
+                            if (split_data.length > 7) {
+                                model.setNoka(split_data[8]);
+                                model.setNosin(split_data[9]);
+                                model.setTahun(split_data[10]);
+                                model.setCabang(split_data[7]);
+                            }
+
                         } else {
+                            model.setNo_plat("-");
+                            model.setNama_mobil("-");
+                            model.setFinance("-");
+                            model.setOvd("-");
                             model.setNoka("-");
                             model.setNosin("-");
                             model.setTahun("-");
