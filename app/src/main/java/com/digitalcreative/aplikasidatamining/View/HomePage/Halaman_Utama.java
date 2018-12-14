@@ -1,18 +1,25 @@
 package com.digitalcreative.aplikasidatamining.View.HomePage;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.digitalcreative.aplikasidatamining.Controller.BackendFirebase;
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
@@ -28,7 +35,8 @@ import java.io.IOException;
  * A simple {@link Fragment} subclass.
  */
 public class Halaman_Utama extends Fragment {
-    LinearLayout updateprofilbtn, csbtn, carapembayaranbtn, lacakbtn, updatedatabtn;
+    CoordinatorLayout lacakbtn, updatedatabtn;
+    ImageButton updateprofilbtn, csbtn, carapembayaranbtn;
     TextView nama, notelp, firstchar;
     SharedPreferences myPref;
     String nama_u, notelp_u, first_char;
@@ -80,6 +88,24 @@ public class Halaman_Utama extends Fragment {
 
         first_char = nama_u.substring(0, 1);
     }
+    private static final int REQUEST_WRITE_STORAGE = 112;
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode)
+        {
+            case REQUEST_WRITE_STORAGE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    //reload my activity with permission granted or use the features what required the permission
+                } else
+                {
+                    Toast.makeText(getActivity(), "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
 
     private void buttonClickonListener() {
         lacakbtn.setOnClickListener(new View.OnClickListener() {
@@ -94,10 +120,18 @@ public class Halaman_Utama extends Fragment {
             @Override
             public void onClick(View view) {
 
+
+                boolean hasPermission = (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+                if (!hasPermission) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            REQUEST_WRITE_STORAGE);
+                }
                 //loading Data
                 BackendFirebase backendFirebase = new BackendFirebase(getContext(), view, finished);
                 try {
-                    backendFirebase.downloadFile();
+                    backendFirebase.downloadFile(getContext());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -151,9 +185,9 @@ public class Halaman_Utama extends Fragment {
         //LinearLayout
         lacakbtn = view.findViewById(R.id.lacakmobil_menu);
         updatedatabtn = view.findViewById(R.id.updatedata_menu);
-        updateprofilbtn = view.findViewById(R.id.updateprofil_menu);
-        csbtn = view.findViewById(R.id.customer_service_menu);
-        carapembayaranbtn = view.findViewById(R.id.cara_pembayaran_menu);
+        updateprofilbtn = view.findViewById(R.id.updateImg_btn);
+        csbtn = view.findViewById(R.id.callImage_Btn);
+        carapembayaranbtn = view.findViewById(R.id.caraImg_Btn);
 
         //SharedPref
         myPref = getContext().getSharedPreferences("detailUser", Context.MODE_PRIVATE);

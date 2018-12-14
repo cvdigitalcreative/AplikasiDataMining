@@ -2,6 +2,7 @@ package com.digitalcreative.aplikasidatamining.View.HomePage;
 
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,8 @@ import android.widget.ProgressBar;
 
 import com.digitalcreative.aplikasidatamining.Controller.Firebase;
 import com.digitalcreative.aplikasidatamining.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +34,22 @@ public class LoadingPage extends Fragment {
     public LoadingPage() {
         // Required empty public constructor
     }
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this.getContext());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this.getActivity(), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i("tes", "This device is not supported.");
 
+            }
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,13 +58,18 @@ public class LoadingPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_loading_page, container, false);
         progressBar = view.findViewById(R.id.progressbar);
 
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                loadIMEI();
-                loadtheFirebase();
-                progressAnimationbar();
-                startApp();
+                if (checkPlayServices()) {
+                    loadIMEI();
+                    loadtheFirebase();
+                    progressAnimationbar();
+                    startApp();
+                }
+
             }
         }).start();
 
