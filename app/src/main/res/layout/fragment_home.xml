@@ -238,9 +238,11 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="120dp"
+        android:layout_marginBottom="7dp"
         android:background="@drawable/rectangleround_btn"
         android:clickable="true"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/logout_account"
         app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout8"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/coordinatorLayout8"
@@ -270,16 +272,18 @@
     <Button
         android:id="@+id/logout_account"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/rr_btn_logout"
         android:text="Logout"
         android:textColor="#fff"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/updatedata_menu"
         app:layout_constraintStart_toStartOf="@+id/updatedata_menu"
         app:layout_constraintTop_toBottomOf="@+id/updatedata_menu" />
@@ -308,233 +312,4 @@
             android:text="Update Data Selesai"/>
         </LinearLayout>
     </LinearLayout>
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical"-->
-    <!--android:gravity="center"-->
-    <!--android:paddingTop="@dimen/Base_paddingTop"-->
-    <!--android:layout_margin="@dimen/Base_margin">-->
-
-    <!--<android.support.design.widget.CoordinatorLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:padding="5dp">-->
-    <!--<RelativeLayout-->
-    <!--android:layout_width="@dimen/imgIconPicture_size_user"-->
-    <!--android:layout_height="wrap_content">-->
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-    <!--android:layout_width="@dimen/imgIconPicture_size_user"-->
-    <!--android:layout_height="@dimen/imgIconPicture_size_user"-->
-    <!--android:src="#7677cf"-->
-    <!--app:civ_border_color="#fff"-->
-    <!--app:civ_border_width="2dp"/>-->
-    <!--<TextView-->
-    <!--android:id="@+id/text_icon"-->
-    <!--android:layout_width="@dimen/imgIconPicture_size_user"-->
-    <!--android:layout_height="@dimen/imgIconPicture_size_user"-->
-    <!--android:textAllCaps="true"-->
-    <!--android:textSize="14pt"-->
-    <!--android:text="A"-->
-    <!--android:textStyle="bold"-->
-    <!--android:textColor="#fff"-->
-    <!--android:gravity="center"/>-->
-    <!--</RelativeLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_marginHorizontal="@dimen/User_margin_Hor">-->
-
-    <!---->
-    <!--</LinearLayout>-->
-    <!--</android.support.design.widget.CoordinatorLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_gravity="center">-->
-    <!---->
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginVertical="10dp"-->
-    <!--android:paddingVertical="@dimen/Menu_padding_vertical"-->
-    <!--android:paddingHorizontal="@dimen/Menu_padding_horizontal"-->
-    <!--android:background="@drawable/rectangleround_menu"-->
-    <!--android:gravity="left">-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/customer_service_menu"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginRight="@dimen/Menu_MarginRight"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:padding="@dimen/Padding_menuImage"-->
-    <!--android:alpha="0.7"-->
-    <!--android:layout_width="@dimen/IconMenu_size"-->
-    <!--android:layout_height="@dimen/IconMenu_size"-->
-    <!--android:src="@mipmap/w_cs"-->
-    <!--android:background="@drawable/circle_iconimage"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/Title_IconMenu_size"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Costumer Service" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/cara_pembayaran_menu"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:layout_marginRight="@dimen/Menu_MarginRight"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:padding="10dp"-->
-    <!--android:alpha="0.7"-->
-    <!--android:layout_width="@dimen/IconMenu_size"-->
-    <!--android:layout_height="@dimen/IconMenu_size"-->
-    <!--android:src="@mipmap/b_cara_bayar"-->
-    <!--android:background="@drawable/circle_iconimage"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/Title_IconMenu_size"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Cara Pembayaran" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/updateprofil_menu"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<ImageView-->
-    <!--android:padding="@dimen/Padding_menuImage"-->
-    <!--android:alpha="0.7"-->
-    <!--android:layout_width="@dimen/IconMenu_size"-->
-    <!--android:layout_height="@dimen/IconMenu_size"-->
-    <!--android:src="@mipmap/b_profil"-->
-    <!--android:background="@drawable/circle_iconimage"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="@dimen/Title_IconMenu_size"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Update Profil" />-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_margin="10dp">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/lacakmobil_menu"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/Btn_halUt_height"-->
-    <!--android:background="@drawable/rectangleround_btn"-->
-    <!--android:layout_marginBottom="@dimen/Btn_margin_bot"-->
-    <!--android:orientation="horizontal">-->
-    <!--<RelativeLayout-->
-    <!--android:layout_width="@dimen/Btn_halUt_height"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<ImageView-->
-    <!--android:padding="@dimen/Padding_btnImage"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@mipmap/w_cari"-->
-    <!--android:background="@drawable/rr_iconlacakupdate"/>-->
-    <!--</RelativeLayout>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:text="Lacak Mobil"-->
-    <!--android:gravity="center"-->
-    <!--android:textSize="@dimen/Text_size_btn_lacakdanupdate"/>-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/updatedata_menu"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/Btn_halUt_height"-->
-    <!--android:background="@drawable/rectangleround_btn"-->
-    <!--android:layout_marginBottom="@dimen/Btn_margin_bot"-->
-    <!--android:orientation="horizontal">-->
-    <!--<RelativeLayout-->
-    <!--android:layout_width="@dimen/Btn_halUt_height"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<ImageView-->
-    <!--android:padding="@dimen/Padding_btnImage"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@mipmap/w_update"-->
-    <!--android:background="@drawable/rr_iconlacakupdate"/>-->
-    <!--</RelativeLayout>-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:text="Update Data"-->
-    <!--android:gravity="center"-->
-    <!--android:textSize="@dimen/Text_size_btn_lacakdanupdate"/>-->
-    <!--</LinearLayout>-->
-
-    <!--<Button-->
-    <!--android:id="@+id/logout_account"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:layout_height="@dimen/Height_btn_logout"-->
-    <!--android:background="@drawable/rr_btn_logout"-->
-    <!--android:textSize="18sp"-->
-    <!--android:textColor="#fff"-->
-    <!--android:textStyle="bold"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:text="Logout" />-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/finish_progressbar"-->
-    <!--android:visibility="gone"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:gravity="center"-->
-    <!--android:clickable="false"-->
-    <!--android:background="#6a000000">-->
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--android:paddingVertical="20dp"-->
-    <!--android:paddingHorizontal="40dp"-->
-    <!--android:background="#fff">-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center"-->
-    <!--android:text="Update Data Selesai"/>-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
 </android.support.constraint.ConstraintLayout>
