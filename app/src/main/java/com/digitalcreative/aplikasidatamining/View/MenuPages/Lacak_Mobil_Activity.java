@@ -174,34 +174,37 @@ public class Lacak_Mobil_Activity extends AppCompatActivity {
                 if (m.find()) {
                     count++;
                     if (count <= 9){
-                        String[] split_data = data_.get(index).get(0).toString().split(";");
+                        String[] split_data = data_.get(index).toString().split(",");
 
                         final Model_LacakMobil model = new Model_LacakMobil();
-                        model.setNama(split_data[1]);
-                        System.out.println("sayur kool "+data_.get(index).get(0).toString());
-                        if (split_data.length > 2) {
-                            model.setNo_plat(split_data[2]);
-                            model.setNama_mobil(split_data[3]);
-                            model.setFinance(split_data[4]);
-                            model.setOvd(split_data[5]);
-                            if (split_data.length > 7) {
-                                model.setNoka(split_data[8]);
-                                model.setNosin(split_data[9]);
-                                model.setTahun(split_data[10]);
-                                model.setCabang(split_data[7]);
+
+
+                            if (split_data.length > 1) {
+                                model.setNama(split_data[1]);
+                                model.setNo_plat(split_data[2]);
+                                model.setNama_mobil(split_data[3]);
+                                model.setFinance(split_data[4]);
+                                model.setOvd(split_data[5]);
+                                if (split_data.length > 7) {
+                                    model.setNoka(split_data[8]);
+                                    model.setNosin(split_data[9]);
+                                    model.setTahun(split_data[10]);
+                                    model.setCabang(split_data[7]);
+                                }
+                                list.add(model);
+                            } else {
+//                                model.setNo_plat("-");
+//                                model.setNama_mobil("-");
+//                                model.setFinance("-");
+//                                model.setOvd("-");
+//                                model.setNoka("-");
+//                                model.setNosin("-");
+//                                model.setTahun("-");
+//                                model.setCabang("-");
                             }
 
-                        } else {
-                            model.setNo_plat("-");
-                            model.setNama_mobil("-");
-                            model.setFinance("-");
-                            model.setOvd("-");
-                            model.setNoka("-");
-                            model.setNosin("-");
-                            model.setTahun("-");
-                            model.setCabang("-");
-                        }
-                        list.add(model);
+
+
                     } else {
                         lastIndex = index;
                         //progress.setVisibility(View.GONE);
