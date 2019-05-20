@@ -269,6 +269,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         myDataBase.execSQL("UPDATE data SET warna='-' WHERE warna IS NULL");
 
     }
+
+    public void reset_data(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int affectedRows = db.delete("data", null, null);
+
+    }
+
     public ArrayList<ArrayList>  getAllData(String nopol, String nosin) {
         openDataBase();
         myDataBase.beginTransaction();

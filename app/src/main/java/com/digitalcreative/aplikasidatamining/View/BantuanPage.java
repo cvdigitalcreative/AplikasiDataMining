@@ -187,7 +187,14 @@ public class BantuanPage extends Fragment {
             System.out.println(jumlah_id.size());
             System.out.println(jumlah__download_id.size());
             if (jumlah_id.size()==jumlah__download_id.size()) {
-
+                DataBaseHelper db= null;
+                try {
+                    db = new DataBaseHelper(getContext());
+                    db.reset_data();
+                    System.out.println("delete data");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                                                                 insert_database(subpath_t1);
                                                                 insert_database(subpath_t2);
                                                                 insert_database(subpath_t3);
@@ -353,6 +360,7 @@ public class BantuanPage extends Fragment {
                                                 myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+
 
 
 
