@@ -133,6 +133,8 @@ public class BantuanPage extends Fragment {
 
             }
         });
+        getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
         return view;
     }
 
@@ -153,7 +155,46 @@ public class BantuanPage extends Fragment {
         call_tbn = view.findViewById(R.id.call_btn);
         sms_btn = view.findViewById(R.id.sms_btn);
     }
+    String url_t0;
+     String subpath_t0;
+    String url_t1;
+     String subpath_t1;
+    String url_t2;
+     String subpath_t2;
+    String url_t3;
+     String subpath_t3;
+    String url_t4;
+     String subpath_t4;
+    String url_t5;
+     String subpath_t5;
+    String url_data_update;
+     String subpath_data_update;
+    private long downloadID;
 
+    private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            //Fetching the download id received with the broadcast
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+
+            //Checking if the received broadcast is for our enqueued download by matching download id
+            if (downloadID == id) {
+
+                                                                insert_database(subpath_t1);
+                                                                insert_database(subpath_t2);
+                                                                insert_database(subpath_t3);
+                                                                insert_database(subpath_t4);
+                                                                insert_database(subpath_t5);
+                                                                insert_database(subpath_data_update);
+                                                                insert_database(subpath_t0);
+                                                                progress.dismiss();
+                                                                update_data();
+                Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    };
     private void doitBoys() {
         sms_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,260 +324,70 @@ public class BantuanPage extends Fragment {
                                                 Toast.makeText(getActivity(), "Data Terupdate", Toast.LENGTH_LONG).show();
 
                                             } else {
-
-                                                if (status_download_db.trim().equals("0")) {
-                                                    myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                                                            String url;
-                                                            final String subpath;
-                                                            url = dataSnapshot.child("link_tes").getValue().toString();
-                                                            subpath = "tes.csv";
-                                                            downloadfromdropbox(url, subpath);
-                                                            final Timer timer = new Timer();
-                                                            timer.schedule(new TimerTask() {
-                                                                @Override
-                                                                public void run() {
-
-                                                                    insert_database(subpath);
-                                                                    String url;
-                                                                    final String subpath;
-                                                                    url = dataSnapshot.child("link_tes1").getValue().toString();
-                                                                    subpath = "testing1.csv";
-                                                                    downloadfromdropbox(url, subpath);
-                                                                    final Timer timer = new Timer();
-                                                                    timer.schedule(new TimerTask() {
-                                                                        @Override
-                                                                        public void run() {
-                                                                            System.out.println("masuk metode ini");
-                                                                            insert_database(subpath);
-                                                                            String url;
-                                                                            final String subpath;
-
-                                                                            url = dataSnapshot.child("link_tes2").getValue().toString();;
-                                                                            subpath = "testing2.csv";
-                                                                            downloadfromdropbox(url, subpath);
-                                                                            final Timer timer = new Timer();
-                                                                            timer.schedule(new TimerTask() {
-                                                                                @Override
-                                                                                public void run() {
-                                                                                    System.out.println("masuk metode ini");
-                                                                                    insert_database(subpath);
-                                                                                    String url;
-                                                                                    final String subpath;
-
-                                                                                    url = dataSnapshot.child("link_tes3").getValue().toString();;
-                                                                                    subpath = "testing3.csv";
-                                                                                    downloadfromdropbox(url, subpath);
-                                                                                    final Timer timer = new Timer();
-                                                                                    timer.schedule(new TimerTask() {
-                                                                                        @Override
-                                                                                        public void run() {
-                                                                                            System.out.println("masuk metode ini");
-                                                                                            insert_database(subpath);
-                                                                                            String url;
-                                                                                            final String subpath;
-                                                                                            url = dataSnapshot.child("link_tes4").getValue().toString();;
-                                                                                            subpath="Testing4.csv";
-                                                                                            downloadfromdropbox(url, subpath);
-                                                                                            final Timer timer = new Timer();
-                                                                                            timer.schedule(new TimerTask() {
-                                                                                                @Override
-                                                                                                public void run() {
-                                                                                                    System.out.println("masuk metode ini");
-                                                                                                    insert_database(subpath);
-                                                                                                    String url;
-                                                                                                    final String subpath;
-                                                                                                    url = dataSnapshot.child("link_tes5").getValue().toString();;
-                                                                                                    subpath = "testing5.csv";
-                                                                                                    downloadfromdropbox(url, subpath);
-                                                                                                    final Timer timer = new Timer();
-                                                                                                    timer.schedule(new TimerTask() {
-                                                                                                        @Override
-                                                                                                        public void run() {
-                                                                                                            System.out.println("masuk metode ini");
-                                                                                                            insert_database(subpath);
-                                                                                                            String url;
-                                                                                                            final String subpath;
-                                                                                                            url = dataSnapshot.child("link_data").getValue().toString();
-                                                                                                            subpath = "dataupdate.csv";
-                                                                                                            downloadfromdropbox(url, subpath);
-                                                                                                            final Timer timer = new Timer();
-                                                                                                            timer.schedule(new TimerTask() {
-                                                                                                                @Override
-                                                                                                                public void run() {
-                                                                                                                    System.out.println("masuk metode ini");
-                                                                                                                    insert_database(subpath);
-                                                                                                                    progress.dismiss();
-
-                                                                                                                    update_data();
-                                                                                                                }
-                                                                                                            }, 30000);
-                                                                                                        }
-                                                                                                    }, 30000);
-                                                                                                }
-                                                                                            }, 30000);
-                                                                                        }
-                                                                                    }, 30000);
-                                                                                }
-                                                                            }, 30000);
-                                                                        }
-                                                                    }, 30000);
-                                                                }
-                                                            }, 30000);
-
-//
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                        }
-                                                    });
+                                                myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
 
-                                                } else {
-//
-//
-//                                                myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-//                                                    @Override
-//                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                                        String url;
-//                                                        final String subpath;
-//                                                        url = dataSnapshot.child("link_data").getValue().toString();
-//                                                        subpath = "dataupdate.csv";
-//                                                        downloadfromdropbox(url, subpath);
+
+                                                        String waktu_download=dataSnapshot.child("waktudownload").getValue().toString();
+                                                        url_t0 = dataSnapshot.child("link_tes").getValue().toString();
+                                                        subpath_t0 = "t0.csv";
+                                                        downloadfromdropbox(url_t0, subpath_t0);
+
+                                                        url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
+                                                        subpath_t1 = "t1.csv";
+                                                        downloadfromdropbox(url_t1, subpath_t1);
+
+                                                        url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
+                                                        subpath_t2 = "t2.csv";
+                                                        downloadfromdropbox(url_t2, subpath_t2);
+
+                                                        url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
+                                                        subpath_t3 = "t3.csv";
+                                                        downloadfromdropbox(url_t3, subpath_t3);
+
+                                                        url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
+                                                        subpath_t4 = "t4.csv";
+                                                        downloadfromdropbox(url_t4, subpath_t4);
+
+
+                                                        url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
+                                                        subpath_t5 = "t5.csv";
+                                                        downloadfromdropbox(url_t5, subpath_t5);
+
+                                                        url_data_update = dataSnapshot.child("link_data").getValue().toString();
+                                                        subpath_data_update = "dataupdate.csv";
+                                                        downloadfromdropbox(url_data_update, subpath_data_update);
+
+
 //                                                        final Timer timer = new Timer();
 //                                                        timer.schedule(new TimerTask() {
 //                                                            @Override
 //                                                            public void run() {
-//                                                                System.out.println("masuk metode ini");
-//                                                                insert_database(subpath);
+//
+//                                                                insert_database(subpath_t1);
+//                                                                insert_database(subpath_t2);
+//                                                                insert_database(subpath_t3);
+//                                                                insert_database(subpath_t4);
+//                                                                insert_database(subpath_t5);
+//                                                                insert_database(subpath_data_update);
+//                                                                insert_database(subpath_t0);
 //                                                                progress.dismiss();
-//
 //                                                                update_data();
+//
+//
 //                                                            }
-//                                                        }, 180000);
-//                                                    }
-//
-//                                                    @Override
-//                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                                    }
-//                                                });
-                                                    myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                                                            String url;
-                                                            final String subpath;
-                                                            url = dataSnapshot.child("link_tes").getValue().toString();
-                                                            subpath = "tes.csv";
-                                                            downloadfromdropbox(url, subpath);
-                                                            final Timer timer = new Timer();
-                                                            timer.schedule(new TimerTask() {
-                                                                @Override
-                                                                public void run() {
-                                                                    System.out.println("masuk metode ini");
-                                                                    insert_database(subpath);
-                                                                    String url;
-                                                                    final String subpath;
-                                                                    url = dataSnapshot.child("link_tes1").getValue().toString();;
-                                                                    subpath = "testing1.csv";
-                                                                    downloadfromdropbox(url, subpath);
-                                                                    final Timer timer = new Timer();
-                                                                    timer.schedule(new TimerTask() {
-                                                                        @Override
-                                                                        public void run() {
-                                                                            System.out.println("masuk metode ini");
-                                                                            insert_database(subpath);
-                                                                            String url;
-                                                                            final String subpath;
-
-                                                                            url = dataSnapshot.child("link_tes2").getValue().toString();;
-                                                                            subpath = "testing2.csv";
-                                                                            downloadfromdropbox(url, subpath);
-                                                                            final Timer timer = new Timer();
-                                                                            timer.schedule(new TimerTask() {
-                                                                                @Override
-                                                                                public void run() {
-                                                                                    System.out.println("masuk metode ini");
-                                                                                    insert_database(subpath);
-                                                                                    String url;
-                                                                                    final String subpath;
-
-                                                                                    url = dataSnapshot.child("link_tes3").getValue().toString();;
-                                                                                    subpath = "testing3.csv";
-                                                                                    downloadfromdropbox(url, subpath);
-                                                                                    final Timer timer = new Timer();
-                                                                                    timer.schedule(new TimerTask() {
-                                                                                        @Override
-                                                                                        public void run() {
-                                                                                            System.out.println("masuk metode ini");
-                                                                                            insert_database(subpath);
-                                                                                            String url;
-                                                                                            final String subpath;
-                                                                                            url = dataSnapshot.child("link_tes4").getValue().toString();;
-                                                                                            subpath="Testing4.csv";
-                                                                                            downloadfromdropbox(url, subpath);
-                                                                                            final Timer timer = new Timer();
-                                                                                            timer.schedule(new TimerTask() {
-                                                                                                @Override
-                                                                                                public void run() {
-                                                                                                    System.out.println("masuk metode ini");
-                                                                                                    insert_database(subpath);
-                                                                                                    String url;
-                                                                                                    final String subpath;
-                                                                                                    url = dataSnapshot.child("link_tes5").getValue().toString();;
-                                                                                                    subpath = "testing5.csv";
-                                                                                                    downloadfromdropbox(url, subpath);
-                                                                                                    final Timer timer = new Timer();
-                                                                                                    timer.schedule(new TimerTask() {
-                                                                                                        @Override
-                                                                                                        public void run() {
-                                                                                                            System.out.println("masuk metode ini");
-                                                                                                            insert_database(subpath);
-                                                                                                            String url;
-                                                                                                            final String subpath;
-                                                                                                            url = dataSnapshot.child("link_data").getValue().toString();
-                                                                                                            subpath = "dataupdate.csv";
-                                                                                                            downloadfromdropbox(url, subpath);
-                                                                                                            final Timer timer = new Timer();
-                                                                                                            timer.schedule(new TimerTask() {
-                                                                                                                @Override
-                                                                                                                public void run() {
-                                                                                                                    System.out.println("masuk metode ini");
-                                                                                                                    insert_database(subpath);
-                                                                                                                    progress.dismiss();
-
-                                                                                                                    update_data();
-                                                                                                                }
-                                                                                                            }, 30000);
-
-
-                                                                                                        }
-                                                                                                    }, 30000);
-                                                                                                }
-                                                                                            }, 30000);
-                                                                                        }
-                                                                                    }, 30000);
-                                                                                }
-                                                                            }, 30000);
-                                                                        }
-                                                                    }, 30000);
-                                                                }
-                                                            }, 30000);
+//                                                        }, Long.parseLong(waktu_download));
 
 //
-                                                        }
+                                                    }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                        }
-                                                    });
-
-                                                }
-
+                                                    }
+                                                });
                                             }
                                         } catch (ParseException e) {
                                             e.printStackTrace();
@@ -566,104 +417,53 @@ public class BantuanPage extends Fragment {
                         myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                                String url;
-                                final String subpath;
-                                url = dataSnapshot.child("link_tes").getValue().toString();
-                                subpath = "tes.csv";
-                                downloadfromdropbox(url, subpath);
-                                final Timer timer = new Timer();
-                                timer.schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        System.out.println("masuk metode ini");
-                                        insert_database(subpath);
-                                        String url;
-                                        final String subpath;
-                                        url = dataSnapshot.child("link_tes1").getValue().toString();;
-                                        subpath = "testing1.csv";
-                                        downloadfromdropbox(url, subpath);
-                                        final Timer timer = new Timer();
-                                        timer.schedule(new TimerTask() {
-                                            @Override
-                                            public void run() {
-                                                System.out.println("masuk metode ini");
-                                                insert_database(subpath);
-                                                String url;
-                                                final String subpath;
-
-                                                url = dataSnapshot.child("link_tes2").getValue().toString();;
-                                                subpath = "testing2.csv";
-                                                downloadfromdropbox(url, subpath);
-                                                final Timer timer = new Timer();
-                                                timer.schedule(new TimerTask() {
-                                                    @Override
-                                                    public void run() {
-                                                        System.out.println("masuk metode ini");
-                                                        insert_database(subpath);
-                                                        String url;
-                                                        final String subpath;
-
-                                                        url = dataSnapshot.child("link_tes3").getValue().toString();;
-                                                        subpath = "testing3.csv";
-                                                        downloadfromdropbox(url, subpath);
-                                                        final Timer timer = new Timer();
-                                                        timer.schedule(new TimerTask() {
-                                                            @Override
-                                                            public void run() {
-                                                                System.out.println("masuk metode ini");
-                                                                insert_database(subpath);
-                                                                String url;
-                                                                final String subpath;
-                                                                url = dataSnapshot.child("link_tes4").getValue().toString();;
-                                                                subpath="Testing4.csv";
-                                                                downloadfromdropbox(url, subpath);
-                                                                final Timer timer = new Timer();
-                                                                timer.schedule(new TimerTask() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        System.out.println("masuk metode ini");
-                                                                        insert_database(subpath);
-                                                                        String url;
-                                                                        final String subpath;
-                                                                        url = dataSnapshot.child("link_tes5").getValue().toString();;
-                                                                        subpath = "testing5.csv";
-                                                                        downloadfromdropbox(url, subpath);
-                                                                        final Timer timer = new Timer();
-                                                                        timer.schedule(new TimerTask() {
-                                                                            @Override
-                                                                            public void run() {
-                                                                                System.out.println("masuk metode ini");
-                                                                                insert_database(subpath);
-                                                                                String url;
-                                                                                final String subpath;
-                                                                                url = dataSnapshot.child("link_data").getValue().toString();
-                                                                                subpath = "dataupdate.csv";
-                                                                                downloadfromdropbox(url, subpath);
-                                                                                final Timer timer = new Timer();
-                                                                                timer.schedule(new TimerTask() {
-                                                                                    @Override
-                                                                                    public void run() {
-                                                                                        System.out.println("masuk metode ini");
-                                                                                        insert_database(subpath);
-                                                                                        progress.dismiss();
-
-                                                                                        update_data();
-                                                                                    }
-                                                                                }, 30000);
 
 
-                                                                            }
-                                                                        }, 30000);
-                                                                    }
-                                                                }, 30000);
-                                                            }
-                                                        }, 30000);
-                                                    }
-                                                }, 30000);
-                                            }
-                                        }, 30000);
-                                    }
-                                }, 30000);
+                                url_t0 = dataSnapshot.child("link_tes").getValue().toString();
+                                subpath_t0 = "t0.csv";
+                                downloadfromdropbox(url_t0, subpath_t0);
+
+                                url_t1 = dataSnapshot.child("link_tes1").getValue().toString();
+                                subpath_t1 = "t1.csv";
+                                downloadfromdropbox(url_t1, subpath_t1);
+
+                                url_t2 = dataSnapshot.child("link_tes2").getValue().toString();
+                                subpath_t2 = "t2.csv";
+                                downloadfromdropbox(url_t2, subpath_t2);
+
+                                url_t3 = dataSnapshot.child("link_tes3").getValue().toString();
+                                subpath_t3 = "t3.csv";
+                                downloadfromdropbox(url_t3, subpath_t3);
+
+                                url_t4 = dataSnapshot.child("link_tes4").getValue().toString();
+                                subpath_t4 = "t4.csv";
+                                downloadfromdropbox(url_t4, subpath_t4);
+
+
+                                url_t5 = dataSnapshot.child("link_tes5").getValue().toString();
+                                subpath_t5 = "t5.csv";
+                                downloadfromdropbox(url_t5, subpath_t5);
+
+                                url_data_update = dataSnapshot.child("link_data").getValue().toString();
+                                subpath_data_update = "dataupdate.csv";
+                                downloadfromdropbox(url_data_update, subpath_data_update);
+
+//                                final Timer timer = new Timer();
+//                                timer.schedule(new TimerTask() {
+//                                    @Override
+//                                    public void run() {
+//                                        insert_database(subpath_t1);
+//                                        insert_database(subpath_t2);
+//                                        insert_database(subpath_t3);
+//                                        insert_database(subpath_t4);
+//                                        insert_database(subpath_t5);
+//                                        insert_database(subpath_data_update);
+//                                        insert_database(subpath_t0);
+//                                        progress.dismiss();
+//                                        update_data();
+//
+//                                    }
+//                                }, Long.parseLong(waktu_download));
 
 //
                             }
@@ -730,7 +530,8 @@ public class BantuanPage extends Fragment {
 
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
+            downloadID=manager.enqueue(request);
+
         }
     }
 
