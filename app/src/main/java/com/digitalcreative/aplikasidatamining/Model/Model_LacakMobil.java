@@ -12,6 +12,26 @@ public class Model_LacakMobil {
     String noka;
     String nosin;
 
+    public String getWarna() {
+        return warna;
+    }
+
+    public void setWarna(String warna) {
+        this.warna = warna;
+    }
+
+    String warna;
+
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
+    }
+
+    String saldo;
+
     public String getTahun() {
         return tahun;
     }

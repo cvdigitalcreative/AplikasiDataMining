@@ -226,10 +226,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:gravity="center"
-        android:text="Lacak Mobil"
+        android:text="Cari Unit Kendaraan"
         android:textSize="@dimen/Text_size_btn_lacakdanupdate"
         app:layout_constraintBottom_toBottomOf="@+id/lacakmobil_menu"
         app:layout_constraintEnd_toEndOf="@+id/lacakmobil_menu"
+        app:layout_constraintHorizontal_bias="0.731"
         app:layout_constraintStart_toStartOf="@+id/lacakmobil_menu"
         app:layout_constraintTop_toTopOf="@+id/lacakmobil_menu" />
 
@@ -272,7 +273,7 @@
     <Button
         android:id="@+id/logout_account"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="57dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
@@ -309,7 +310,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Update Data Selesai"/>
+            android:text="Sedang Menyiapkan Data"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Tunggu Sebentar . . ."/>
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

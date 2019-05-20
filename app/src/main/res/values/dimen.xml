@@ -42,9 +42,32 @@
     <dimen name="Textsize_CP_konten">9pt</dimen>
 
     <!--Detil Mobil Dimensi-->
-    <dimen name="detail_mobil_textSize">15dp</dimen>
+    <dimen name="detail_mobil_textSize">14dp</dimen>
     <dimen name="detail_mobil_paddingHor">20dp</dimen>
-    <dimen name="detail_mobil_paddingVer">5dp</dimen>
+    <dimen name="detail_mobil_paddingVer">0dp</dimen>
 
     <dimen name="lacak_mobil">18dp</dimen>
+
+
+
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_titleSize">22sp</dimen>
+
+    <!-- Bantuan -->
+    <dimen name="bantuan_btn_wa_sms_tlp">80dp</dimen>
+    <dimen name="bantuan_btn_lainnya">50dp</dimen>
+
+    <!-- Akun -->
+    <dimen name="akun_photo_akun">55dp</dimen>
+    <dimen name="akun_text_description_size">14sp</dimen>
+    <dimen name="akun_text_title_size">16sp</dimen>
+
+    <!-- Register -->
+    <dimen name="register_txfield_horizontal">35dp</dimen>
+    <dimen name="register_txfield_vertical">13dp</dimen>
+
+    <!--Bantuan-->
+    <dimen name="bantuan_addCar_textSize">17sp</dimen>
+    <dimen name="bantuan_addCar_textSize_editText">16sp</dimen>
 </resources>

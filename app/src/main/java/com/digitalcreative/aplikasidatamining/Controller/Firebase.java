@@ -44,6 +44,8 @@ public class Firebase {
                 String status_pembayaran = dataSnapshot.child("status_pembayaran").getValue().toString();
                 String tanggal_aktif = dataSnapshot.child("tanggal_aktif").getValue().toString();
                 String tanggal_berakhir = dataSnapshot.child("tanggal_berakhir").getValue().toString();
+                String imei = dataSnapshot.child("imei").getValue().toString();
+                String last_update_data= dataSnapshot.child("last_update_data").getValue().toString();
 
                 sendBundle(nama_lengkap, no_telepon);
 
@@ -57,6 +59,8 @@ public class Firebase {
                 chaching.putString("password", password);
                 chaching.putString("tanggal_aktif", tanggal_aktif);
                 chaching.putString("tanggal_berakhir", tanggal_berakhir);
+                chaching.putString("imei", imei);
+                chaching.putString("last_update_data", last_update_data);
                 chaching.commit();
             }
 
@@ -76,7 +80,4 @@ public class Firebase {
 
     }
 
-    public void savefirebase(){
-
-    }
 }

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +25,18 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
     List<Model_LacakMobil> list;
     Context context;
     Button share, back;
+    //private OnLoadMoreListener onLoadMoreListener;
+    private boolean isLoading;
+    private int lastVisibleItem, totalItemCount;
+    private int visibleThreshold = 5;
 
-    public Detail_lacakMobil(List<Model_LacakMobil> list, Context context) {
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
+
+    public Detail_lacakMobil(List<Model_LacakMobil> list, Context context, RecyclerView recyclerView) {
         this.list = list;
         this.context = context;
+
     }
 
     @NonNull
@@ -38,63 +48,66 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
 
     @Override
     public void onBindViewHolder(@NonNull Detail_lacakMobil.ViewHolder holder, int i) {
-        final Model_LacakMobil model = list.get(i);
-        holder.nama_pemilik.setText(model.getNama());
-        holder.no_plat.setText(model.getNo_plat());
-        holder.mobil.setText(model.getNama_mobil());
-        holder.tahun.setText(model.getTahun());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
-                final View inflater = ((AppCompatActivity)v.getContext()).getLayoutInflater().inflate(R.layout.lacak_mobil_detail, null);
-                alertDialog.setView(inflater);
 
-                //Init the component
-                alertDialog.setTitle("Detail Mobil");
-                sayHello(model, inflater, alertDialog);
+        if (holder instanceof ViewHolder){
+            final Model_LacakMobil model = list.get(i);
+            holder.nama_pemilik.setText(model.getNama());
+            holder.no_plat.setText(model.getNo_plat());
+            holder.mobil.setText(model.getNama_mobil());
+            holder.tahun.setText(model.getFinance());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
+                    final View inflater = ((AppCompatActivity)v.getContext()).getLayoutInflater().inflate(R.layout.lacak_mobil_detail, null);
+                    alertDialog.setView(inflater);
 
-                final AlertDialog dialog =  alertDialog.create();
-                dialog.show();
+                    //Init the component
+                    sayHello(model, inflater, alertDialog);
 
-                share.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        try {
-                            intent.setType("text/plain");
-                            intent.setPackage("com.whatsapp");
-                            intent.putExtra(Intent.EXTRA_TEXT,
-                                            "Pemilik : " +model.getNama() +"\n"
-                                                    +"Nama Unit : " +model.getNama_mobil() +"\n"
-                                                    +"No Plat : " +model.getNo_plat() +"\n"
-                                                    +"Finance : " +model.getFinance() +"\n"
-                                                    +"Ovd : " +model.getOvd() +"\n"
-                                                    +"Cabang : " +model.getCabang() +"\n"
-                                                    +"Noka : " +model.getNoka() +"\n"
-                                                    +"Nomor Mesin : " +model.getNosin() +"\n"
-                                                    +"Tahun : " +model.getTahun() +"\n");
-                            v.getContext().startActivity(intent);
-                        } catch (android.content.ActivityNotFoundException ex){
-                            Toast.makeText(v.getContext(), "Whatsapp have not been installed", Toast.LENGTH_LONG).show();
+                    final AlertDialog dialog =  alertDialog.create();
+                    dialog.show();
+
+                    share.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            try {
+                                intent.setType("text/plain");
+                                intent.setPackage("com.whatsapp");
+                                intent.putExtra(Intent.EXTRA_TEXT,
+                                        "Dikirim melalui aplikasi data matel nusantara ->"
+                                                +"Link : https://play.google.com/store/apps/details?id=com.digitalcreative.aplikasidatamining "+"\n"
+                                                +"Nomor Polisi : " +model.getNo_plat() +"\n"
+                                                +"Model Unit : " +model.getNama_mobil() +"\n"
+                                                +"Nomor Rangka : " +model.getNoka() +"\n"
+                                                +"Nomor Mesin : " +model.getNosin() +"\n"
+                                                +"Finance : " +model.getFinance() +"\n"
+                                                +"INI BUKAN ALAT SAH PENARIKAN UNIT"
+                                              );
+                                v.getContext().startActivity(intent);
+                            } catch (android.content.ActivityNotFoundException ex){
+                                Toast.makeText(v.getContext(), "Whatsapp have not been installed", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
 
-                back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
+                    back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
+            });
+        }
+
     }
 
     private void sayHello(Model_LacakMobil model, final View inflater, final AlertDialog.Builder alertDialog) {
-        TextView pemilikmobil, no_plat, namaunit, dinance, ovd, detailcabang, noka, nosin, tahun;
+        TextView pemilikmobil, no_plat, namaunit, dinance, ovd, detailcabang, noka, nosin, tahun, warna;
 
-
+        warna = inflater.findViewById(R.id.detail_warna);
         pemilikmobil = inflater.findViewById(R.id.detail_pemilikmobil);
         no_plat = inflater.findViewById(R.id.detail_noplat);
         namaunit = inflater.findViewById(R.id.detail_namaunit);
@@ -114,6 +127,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
         noka.setText(model.getNoka());
         nosin.setText(model.getNosin());
         tahun.setText(model.getTahun());
+        warna.setText(model.getWarna());
 
         share = inflater.findViewById(R.id.detail_btn_share);
         back = inflater.findViewById(R.id.detail_btn_kembali);
@@ -121,7 +135,7 @@ public class Detail_lacakMobil extends RecyclerView.Adapter<Detail_lacakMobil.Vi
 
     @Override
     public int getItemCount() {
-            return list.size();
+        return list.size();
     }
 
 
