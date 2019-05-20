@@ -142,6 +142,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+    public long count_data(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long taskCount = DatabaseUtils.queryNumEntries(db, "data");
+        return taskCount;
+    }
+
 
     public void insertdata(String file) {
         // get writable database as we want to write data

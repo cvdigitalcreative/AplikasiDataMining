@@ -190,7 +190,26 @@ public class BantuanPage extends Fragment {
                                                                 insert_database(subpath_t0);
                                                                 progress.dismiss();
                                                                 update_data();
-                Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+                DataBaseHelper dbhelper;
+                try {
+                    dbhelper=new DataBaseHelper(getContext());
+                    long count_data=dbhelper.count_data();
+
+
+                    Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+                    finished.setVisibility(View.VISIBLE);
+                    finished.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finished.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+                    tv2.setText(String.valueOf(count_data));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
