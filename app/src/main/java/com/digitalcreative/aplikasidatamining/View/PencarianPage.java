@@ -346,7 +346,6 @@ public class PencarianPage extends Fragment {
 
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
             downloadID=manager.enqueue(request);
         }
     }
