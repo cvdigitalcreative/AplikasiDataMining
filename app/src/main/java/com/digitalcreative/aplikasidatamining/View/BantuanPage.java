@@ -52,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -133,6 +134,8 @@ public class BantuanPage extends Fragment {
 
             }
         });
+        jumlah_id=new ArrayList<>();
+        jumlah__download_id=new ArrayList<>();
         getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         return view;
@@ -169,6 +172,8 @@ public class BantuanPage extends Fragment {
      String subpath_t5;
     String url_data_update;
      String subpath_data_update;
+     private ArrayList<Long> jumlah_id;
+    private ArrayList<Long> jumlah__download_id;
     private long downloadID;
 
     private BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
@@ -177,10 +182,19 @@ public class BantuanPage extends Fragment {
 
             //Fetching the download id received with the broadcast
             long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
+            jumlah_id.add(id);
             //Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadID == id) {
-
+            System.out.println(jumlah_id.size());
+            System.out.println(jumlah__download_id.size());
+            if (jumlah_id.size()==jumlah__download_id.size()) {
+                DataBaseHelper db= null;
+                try {
+                    db = new DataBaseHelper(getContext());
+                    db.reset_data();
+                    System.out.println("delete data");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                                                                 insert_database(subpath_t1);
                                                                 insert_database(subpath_t2);
                                                                 insert_database(subpath_t3);
@@ -190,7 +204,26 @@ public class BantuanPage extends Fragment {
                                                                 insert_database(subpath_t0);
                                                                 progress.dismiss();
                                                                 update_data();
-                Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+                DataBaseHelper dbhelper;
+                try {
+                    dbhelper=new DataBaseHelper(getContext());
+                    long count_data=dbhelper.count_data();
+
+
+                    Toast.makeText(getContext(), "Download Completed", Toast.LENGTH_SHORT).show();
+                    finished.setVisibility(View.VISIBLE);
+                    finished.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finished.setVisibility(View.INVISIBLE);
+                        }
+                    });
+
+                    tv2.setText(String.valueOf(count_data));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
@@ -327,6 +360,7 @@ public class BantuanPage extends Fragment {
                                                 myRef.child("link").addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+
 
 
 
@@ -531,7 +565,8 @@ public class BantuanPage extends Fragment {
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             downloadID=manager.enqueue(request);
-
+            jumlah__download_id.add(downloadID);
+            System.out.println("tes"+downloadID);
         }
     }
 

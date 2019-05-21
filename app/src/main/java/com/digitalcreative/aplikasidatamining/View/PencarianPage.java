@@ -154,23 +154,23 @@ public class PencarianPage extends Fragment {
     }
 
     private void recentFucn() {
-        //Preparing Data
-        String[] recent = new String[]{};
-
-        //Set Data to ListView
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.pencarian_listview, R.id.text_listview,recent);
-        listView.setAdapter(arrayAdapter);
-
-        //Set OnClick
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemValue = (String) listView.getItemAtPosition(position);
-                Toast.makeText(getActivity(),
-                        "Position :"+position+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
-            }
-        });
+//        //Preparing Data
+//        String[] recent = new String[]{};
+//
+//        //Set Data to ListView
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.pencarian_listview, R.id.text_listview,recent);
+//        listView.setAdapter(arrayAdapter);
+//
+//        //Set OnClick
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String itemValue = (String) listView.getItemAtPosition(position);
+//                Toast.makeText(getActivity(),
+//                        "Position :"+position+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+//                        .show();
+//            }
+//        });
 
     }
 
@@ -346,7 +346,6 @@ public class PencarianPage extends Fragment {
 
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(request);
             downloadID=manager.enqueue(request);
         }
     }
@@ -417,8 +416,7 @@ public class PencarianPage extends Fragment {
         popup_bup = view.findViewById(R.id.pop_up_data_belum_update);
         finished =  view.findViewById(R.id.finish_progresbar2);
 
-        //ListView
-        listView = view.findViewById(R.id.listview);
+
     }
 
     private boolean checkDataBase() {

@@ -142,6 +142,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
     }
+    public long count_data(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long taskCount = DatabaseUtils.queryNumEntries(db, "data");
+        return taskCount;
+    }
+
 
     public void insertdata(String file) {
         // get writable database as we want to write data
@@ -263,6 +269,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         myDataBase.execSQL("UPDATE data SET warna='-' WHERE warna IS NULL");
 
     }
+
+    public void reset_data(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int affectedRows = db.delete("data", null, null);
+
+    }
+
     public ArrayList<ArrayList>  getAllData(String nopol, String nosin) {
         openDataBase();
         myDataBase.beginTransaction();
