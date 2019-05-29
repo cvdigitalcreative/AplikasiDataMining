@@ -70,4 +70,14 @@
     <!--Bantuan-->
     <dimen name="bantuan_addCar_textSize">17sp</dimen>
     <dimen name="bantuan_addCar_textSize_editText">16sp</dimen>
+
+
+    <!--Keyboard-->
+    <dimen name="buttonwidthheight">38dp</dimen>
+    <dimen name="margin_keyboard">0.5dp</dimen>
+    <dimen name="weight_keyboard">1.2dp</dimen>
+    <dimen name="paddingText">9dp</dimen>
+    <dimen name="layoutheight">50dp</dimen>
+    <dimen name="paddingLayout">2dp</dimen>
+    <dimen name="textSize">15dp</dimen>
 </resources>

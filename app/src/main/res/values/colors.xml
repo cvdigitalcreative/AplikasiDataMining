@@ -21,4 +21,8 @@
     <color name="bnv_basecolor">@color/baseColor</color>
     <color name="bnv_iconTint">#fff</color>
     <color name="bnv_textColor">#fff</color>
+
+    <color name="keyboardTextcolor">#fff</color>
+    <color name="keyboardcolor">#F76565</color>
+    <color name="keyboardcolor2">#504E4E</color>
 </resources>
